@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Files</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <textarea name="" id="input" rows="7" cols="50"></textarea>
+    <select name="filesFormats" id="filesFormats">
+        <option value disabled selected>-Select an option.-</option>
+        <option value="CSVtoJson">CSV -> JSON</option>
+        <option value="JsontoCSV">JSON -> CSV</option>
+    </select>
+    <input type="button" value="Convert" id="convert">
+    <input type="file" name="" id="upload">
+    <textarea name="" id="output" rows="7" cols="50" disabled></textarea>
+    <button>Copy</button>
+    <script src="main.js"></script>
+</body>
+</html>
