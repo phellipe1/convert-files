@@ -1,3 +1,4 @@
+import { parseCSVLine, escapeCSV } from "./parser.js";
 let currentInput = null;
 let fileContent = null;
 const Conversor = {
@@ -13,17 +14,17 @@ const Conversor = {
             }
             // write headers in csv variable
             const headers = Object.keys(data[0]);
-            let csv = headers.join(";") + "\n";
+            let csv = headers.join(",") + "\n";
 
             // write rows in csv variable
             data.forEach(obj => {
                 const row = headers.map(key => {
-                    const value = obj[key];
+                    let value = obj[key];
                     if(typeof value === "object" && value !== null){
-                        return JSON.stringify(value);
+                        value = JSON.stringify(value);
                     }
-                    return value;
-                }).join(";");
+                    return escapeCSV(value);
+                }).join(",");
                 csv += row + "\n";
             });
             this.render(csv);
@@ -40,17 +41,18 @@ const Conversor = {
             return;
             }
             const rows = text.split("\n");
+
             if (!rows.length || rows[0].trim() === "") {
                 alert("Empty CSV!");
                 return;
             }
-            const headers = rows[0].split(';').map(item => item.trim());
-            for(let x = 1; x < rows.length; x++){
-                let rowValues = rows[x].split(';');
-                
-                if(rowValues.length < headers.length) {continue;}
-                let myObj = {}; 
 
+            const headers = parseCSVLine(rows[0]).map(item => item.trim());
+            for(let i = 1; i < rows.length; i++){
+                let rowValues = parseCSVLine(rows[i]);
+                if(rowValues.length < headers.length) {continue;}
+                let myObj = {};
+                
                 headers.forEach((header, index) =>{
                     myObj[header] = rowValues[index] ? rowValues[index].trim() : null;
                 });
