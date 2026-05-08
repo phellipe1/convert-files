@@ -1,74 +1,111 @@
-# 📄 CSV ⇄ JSON Converter
+# Convert Files
 
-A simple **CSV ↔ JSON converter** built with pure HTML, CSS, and JavaScript.
+A simple web app to convert files and text between JSON and CSV formats.
 
-## 🚀 Features
+## Features
 
-* Convert **JSON → CSV**
-* Convert **CSV → JSON**
-* Basic input validation
-* Error handling
-* Counter for converted and ignored rows
-* Supports multiple CSV lines
-* Uses `;` as a separator for better spreadsheet compatibility
-
----
-
-## 🖥️ Interface
-
-* Input field to paste data
-* Conversion type selector
-* Convert button
-* Output field displaying the result
+- Convert JSON to CSV
+- Convert CSV to JSON
+- Upload `.json` and `.csv` files
+- Paste raw text directly into the input
+- Copy converted output to clipboard
+- CSV parser with quoted field support
+- Handles arrays and nested objects
+- Basic validation for invalid inputs
 
 ---
 
-## 📌 How to use
+## Supported Conversions
 
-1. Paste your data into the input field
-2. Select the conversion type:
+### JSON → CSV
+Supports:
+- Arrays of objects
+- Arrays inside objects
+- Nested objects (serialized)
 
-   * `CSV → JSON`
-   * `JSON → CSV`
-3. Click **Convert**
-4. The result will appear in the output field
-
-
-## 🛠️ Technologies used
-
-* HTML5
-* CSS3
-* JavaScript (Vanilla)
-
----
-
-## 🧠 Project purpose
-
-This project was built to practice:
-
-* String manipulation
-* Data structures (arrays and objects)
-* Data format conversion logic
-* Error handling
-* JavaScript fundamentals
-
----
-
-### JSON
+Example:
 
 ```json
 [
-  { "name": "John", "age": 30 },
-  { "name": "Maria", "age": 25 }
+  {
+    "name": "Phellipe",
+    "skills": ["driving", "coding"],
+    "address": {
+      "city": "Rio"
+    }
+  }
 ]
 ```
 
-### CSV
+Converts to:
 
-```
-name;age
-John;30
-Maria;25
+```csv
+name,skills,address
+Phellipe,"[""driving"",""coding""]","{""city"":""Rio""}"
 ```
 
 ---
+
+### CSV → JSON
+
+Supports:
+- Quoted fields
+- Escaped quotes
+- Commas inside fields
+
+Example:
+
+```csv
+name,quote
+Phellipe,"hello, world"
+```
+
+Converts to:
+
+```json
+[
+  {
+    "name": "Phellipe",
+    "quote": "hello, world"
+  }
+]
+```
+
+---
+
+## Technologies Used
+
+- HTML
+- CSS
+- JavaScript
+
+---
+
+## Future Improvements
+
+- Better UI/UX
+- Download converted files
+- JSON flattening
+- Multi-line CSV support
+- XML support
+- Auto-detect CSV delimiters
+
+---
+
+## Running Locally
+
+Clone the repository:
+
+```bash
+git clone <your-repo-url>
+```
+
+Open the project folder and run it with a local server.
+
+Example using VS Code Live Server.
+
+---
+
+## Author
+
+Made by Phellipe Cardoso
